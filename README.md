@@ -6,6 +6,8 @@ Project has 3 sections
 - Quote Page: View all the quotes from different users.
 - Create Quote Page: Create new quote having caption and image.
 
+Link to the Live Website: [Link](https://sparkling-otter-94f56c.netlify.app/)
+
 ### `npm install`
 
 Run the above command to install all the dependecies.
