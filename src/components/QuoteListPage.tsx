@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "./QuoteListPage.css";
 
@@ -17,11 +17,7 @@ const QuoteListPage = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchQuotes();
-  }, [offset]);
-
-  const fetchQuotes = async () => {
+  const fetchQuotes = useCallback(async () => {
     try {
       const response = await fetch(
         `https://assignment.stage.crafto.app/getQuotes?limit=${limit}&offset=${offset}`,
@@ -42,7 +38,11 @@ const QuoteListPage = () => {
     } catch (err) {
       console.error("Error fetching quotes", err);
     }
-  };
+  }, [limit, offset, token]);
+
+  useEffect(() => {
+    fetchQuotes();
+  }, [fetchQuotes]);
 
   const loadMore = () => {
     setOffset(offset + limit);
